@@ -19,10 +19,10 @@ Ce projet est un reverse shell minimaliste écrit en assembly pour les systèmes
 1. Sauvegarde le code dans un fichier nommé `reverse_shell.asm`.
 2. Assemble et linke le code avec les commandes suivantes :
    ```bash
-   nasm -f elf64 reverse_shell.asm -o reverse_shell.o
-   ld reverse_shell.o -o reverse_shell
+   nasm -f elf64 rev_shell.asm -o rev_shell.o
+   ld rev_shell.o -o rev_shell
    ```
-3. L'exécutable `reverse_shell` est prêt à être utilisé.
+3. L'exécutable `rev_shell` est prêt à être utilisé.
 
 ## Utilisation
 1. Lance un listener sur la machine cible (par défaut : `127.0.0.1:4444`) :
@@ -31,7 +31,7 @@ Ce projet est un reverse shell minimaliste écrit en assembly pour les systèmes
    ```
 2. Exécute le reverse shell :
    ```bash
-   ./reverse_shell
+   ./rev_shell
    ```
 3. Une fois connecté, tu peux envoyer des commandes via le listener.
 
@@ -61,7 +61,7 @@ nc -l 4444
 ```
 Sur la machine source :
 ```bash
-./reverse_shell
+./rev_shell
 ```
 Tape des commandes comme `whoami` ou `ls` dans le listener pour voir les résultats.
 
